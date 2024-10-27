@@ -1,0 +1,68 @@
+version: '3.8'
+
+services:
+  database:
+    image: postgres:13
+    container_name: bookreviewhub_database
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: bookreviewhub
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+
+  user-service:
+    build: ./user-service
+    container_name: user_service
+    environment:
+      DATABASE_HOST: database
+      DATABASE_NAME: bookreviewhub
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: postgres
+      SECRET_KEY: your_secret_key
+    depends_on:
+      - database
+    ports:
+      - "5001:5001"
+
+  book-service:
+    build: ./book-service
+    container_name: book_service
+    environment:
+      DATABASE_HOST: database
+      DATABASE_NAME: bookreviewhub
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: postgres
+    depends_on:
+      - database
+    ports:
+      - "5002:5002"
+
+  review-service:
+    build: ./review-service
+    container_name: review_service
+    environment:
+      DATABASE_HOST: database
+      DATABASE_NAME: bookreviewhub
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: postgres
+    depends_on:
+      - database
+    ports:
+      - "5003:5003"
+
+  gateway-service:
+    build: ./gateway-service
+    container_name: gateway_service
+    depends_on:
+      - user-service
+      - book-service
+      - review-service
+    ports:
+      - "5000:5000"
+
+volumes:
+  db_data:
