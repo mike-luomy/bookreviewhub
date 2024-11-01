@@ -138,3 +138,4 @@
 4. Configuration Management Repository
     The source code for BookReviewHub, including the Kubernetes deployment configurations, is hosted on GitHub: 
     https://github.com/mike-luomy/bookreviewhub
+    the source code and deployment are still underdebuging, not finalized yet.  
