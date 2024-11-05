@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: book-service
-          image: yourdockerhubusername/book-service:latest
+          image: mike777/book-service:latest
           ports:
             - containerPort: 5002
           env:
