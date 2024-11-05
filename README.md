@@ -139,3 +139,37 @@
     The source code for BookReviewHub, including the Kubernetes deployment configurations, is hosted on GitHub: 
     https://github.com/mike-luomy/bookreviewhub
     the source code and deployment are still underdebuging, not finalized yet.  
+
+
+05/Nov/ 2004
+    docker is running. localhost:5000 shows welcome message.
+    use cURL to test the interface
+
+    register a new user
+    curl -X POST http://localhost:5000/users/register \
+     -H "Content-Type: application/json" \
+     -d '{"username": "john_doe", "password": "securepassword"}'
+
+    user login
+    curl -X POST http://localhost:5000/users/login \
+     -H "Content-Type: application/json" \
+     -d '{"username": "john_doe", "password": "securepassword"}'
+
+     add a new book
+     curl -X POST http://localhost:5000/books \
+     -H "Content-Type: application/json" \
+     -d '{"title": "1984", "author": "George Orwell", "genre": "Dystopian", "publication_date": "1949-06-08"}'
+
+    get books
+    curl http://localhost:5000/books
+
+    add a review
+    curl -X POST http://localhost:5000/reviews \
+     -H "Content-Type: application/json" \
+     -d '{"book_id": 1, "user_id": 1, "rating": 5, "comment": "A masterpiece!"}'
+
+    get reviews
+    curl http://localhost:5000/reviews
+
+
+
