@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: user-service
-          image: yourdockerhubusername/user-service:latest
+          image: mikeluo777/user-service:latest
           ports:
             - containerPort: 5001
           env:
