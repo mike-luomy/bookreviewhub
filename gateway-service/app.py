@@ -8,6 +8,10 @@ USER_SERVICE_URL = "http://user-service:5001"
 BOOK_SERVICE_URL = "http://book-service:5002"
 REVIEW_SERVICE_URL = "http://review-service:5003"
 
+@app.route('/', methods=['GET'])
+def index():
+    return jsonify({"message": "Welcome to the BookReviewHub Gateway!"}), 200
+
 @app.route('/users/register', methods=['POST'])
 def register_user():
     response = requests.post(f"{USER_SERVICE_URL}/register", json=request.json)
