@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: review-service
-          image: yourdockerhubusername/review-service:latest
+          image: mikeluo777/review-service:latest
           ports:
             - containerPort: 5003
           env:
