@@ -23,8 +23,14 @@ kind: Service
 metadata:
   name: gateway-service
 spec:
-  type: ClusterIP
+  #type: ClusterIP
+  #ports:
+   # - port: 5000
+  type: NodePort
   ports:
-    - port: 5000
+    - port: 5000           # The port on the service
+      targetPort: 5000      # The port the container listens on
+      nodePort: 30000       # The external port on the node (can be any port in the range 30000-32767)
+
   selector:
     app: gateway-service
